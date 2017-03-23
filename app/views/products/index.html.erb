@@ -1,0 +1,33 @@
+<h1>Products</h1>
+
+
+<a href="/products?sort=title&sort_order=asc">Sort by Title Ascending</a>
+<br />
+<a href="/products?sort=title&sort_order=desc">Sort by Title Descending</a>
+
+<br />
+<br />
+
+<a href="/products?sort=prep_time&sort_order=asc">Sort by Prep Time Ascending</a>
+<br />
+<a href="/products?sort=prep_time&sort_order=desc">Sort by Prep Time Descending</a>
+
+<br />
+<br />
+
+<% @products.each_slice(3) do |three_products| %>
+  <div class="row">
+    <% three_products.each do |product| %>
+      <div class="col-md-4">
+        <div class="well">
+          <a href="/products/<%= product.id %>">
+            <h2><%= product.title %></h2>
+            <h4>Prep Time: <%= product.prep_time %> minutes</h4>
+            <br />
+            <img class="index_product_image" src="<%= product.image %>">
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
