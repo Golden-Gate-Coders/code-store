@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-
+  before_action :authenticate_user!
+  
   # RESTful routes
   def index
     # sort = params[:sort]

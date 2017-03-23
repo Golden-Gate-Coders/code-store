@@ -1,16 +1,16 @@
 <h1>Products</h1>
 
 
-<a href="/products?sort=title&sort_order=asc">Sort by Title Ascending</a>
+<a href="/products?sort=name&sort_order=asc">Sort by Name Ascending</a>
 <br />
-<a href="/products?sort=title&sort_order=desc">Sort by Title Descending</a>
+<a href="/products?sort=name&sort_order=desc">Sort by Name Descending</a>
 
 <br />
 <br />
 
-<a href="/products?sort=prep_time&sort_order=asc">Sort by Prep Time Ascending</a>
+<a href="/products?sort=price&sort_order=asc">Sort by Price Ascending</a>
 <br />
-<a href="/products?sort=prep_time&sort_order=desc">Sort by Prep Time Descending</a>
+<a href="/products?sort=price&sort_order=desc">Sort by Price Descending</a>
 
 <br />
 <br />
@@ -21,8 +21,8 @@
       <div class="col-md-4">
         <div class="well">
           <a href="/products/<%= product.id %>">
-            <h2><%= product.title %></h2>
-            <h4>Prep Time: <%= product.prep_time %> minutes</h4>
+            <h2><%= product.name %></h2>
+            <h4>Price: $<%= product.price %></h4>
             <br />
             <img class="index_product_image" src="<%= product.image %>">
           </a>

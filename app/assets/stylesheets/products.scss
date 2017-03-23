@@ -1,3 +1,12 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-image: url('sayagata-400px.png');
+}
+
+.index_product_image {
+  width: 120px;
+}
