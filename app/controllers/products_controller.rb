@@ -1,23 +1,22 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  
+
   # RESTful routes
   def index
-    # sort = params[:sort]
-    # sort_order = params[:sort_order]
-    # time = params[:time]
+    sort = params[:sort]
+    sort_order = params[:sort_order]
+    discount = params[:discount]
 
-    # if time
-    #   @recipes = Recipe.where("prep_time < ?", 20)
-    #   if sort
-    #     @recipes = @recipes.order(prep_time: :desc)
-    #   end
-    # elsif sort && sort_order
-    #   @recipes = Recipe.all.order(sort => sort_order)
-    # else
-    #   @recipes = Recipe.all
-    # end
-    @products = Product.all
+    if discount
+      @products = Product.where("price < ?", 20)
+      if sort
+        @products = @products.order(price: :desc)
+      end
+    elsif sort && sort_order
+      @products = Product.all.order(sort => sort_order)
+    else
+      @products = Product.all
+    end
   end
 
   def show

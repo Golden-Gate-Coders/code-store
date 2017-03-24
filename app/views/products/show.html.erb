@@ -3,7 +3,7 @@
 <img src="<%= @product.image %>" class="product_show_image">
 
 <h3>Price: 
-$<%= @product.price %></h3>
+<%= number_to_currency(@product.price) %></h3>
 
 <h3>Description: </h3>
 <%= @product.description %>
