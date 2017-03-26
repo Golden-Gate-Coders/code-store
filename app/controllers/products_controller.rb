@@ -18,8 +18,6 @@ class ProductsController < ApplicationController
     #   @products = Product.all
     # end
 
-    @categories = Category.all
-
     category_id = params[:category_id]
     if category_id
       @category = Category.find_by(id: category_id)
