@@ -7,16 +7,29 @@ class ProductsController < ApplicationController
     sort_order = params[:sort_order]
     discount = params[:discount]
 
-    if discount
-      @products = Product.where("price < ?", 20)
-      if sort
-        @products = @products.order(price: :desc)
-      end
-    elsif sort && sort_order
-      @products = Product.all.order(sort => sort_order)
+    # if discount
+    #   @products = Product.where("price < ?", 20)
+    #   if sort
+    #     @products = @products.order(price: :desc)
+    #   end
+    # elsif sort && sort_order
+    #   @products = Product.all.order(sort => sort_order)
+    # else
+    #   @products = Product.all
+    # end
+
+    @categories = Category.all
+
+    category_id = params[:category_id]
+    if category_id
+      @category = Category.find_by(id: category_id)
+      @products = @category.products
     else
       @products = Product.all
     end
+
+
+
   end
 
   def show

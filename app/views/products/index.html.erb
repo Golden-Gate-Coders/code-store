@@ -1,5 +1,18 @@
 <h1>Products</h1>
 
+<% if @category %>
+  <h2>Viewing products in: <%= @category.name %></h2>
+<% end %>
+
+<h3>Categories</h3>
+<% @categories.each do |category| %>
+  <a href="/products?category_id=<%= category.id %>"><%= category.name %></a>
+  <br />
+<% end %>
+
+<br />
+<br />
+
 
 <a href="/products?sort=name&sort_order=asc">Sort by Name Ascending</a>
 <br />
