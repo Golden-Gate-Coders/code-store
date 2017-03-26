@@ -1,4 +1,3 @@
-
 <h1><%= @product.name %></h1>
 <img src="<%= @product.image %>" class="product_show_image">
 
@@ -7,6 +6,19 @@
 
 <h3>Description: </h3>
 <%= @product.description %>
+
+<br />
+<br />
+<div>
+  <%= form_tag "/orders", method: :post do %>
+    Quantity: <input type="text" name="product_quantity">
+    <br />
+    <input type="hidden" name="product_id" value="<%= @product.id %>">
+    <br />
+    <input type="submit" value="Buy Now!" class="btn btn-success">
+  <% end %>
+</div>
+<br />
 
 <h4>Stock: 
 <%= @product.stock %> items in stock</h4>

@@ -36,4 +36,13 @@ Rails.application.routes.draw do
   # Logout
   get "/logout" => "sessions#destroy"
 
+
+  # Order form
+  post "/orders" => "orders#create"
+
+  # Order show page
+  get "/orders/:id" => "orders#show"
+
+
+
 end

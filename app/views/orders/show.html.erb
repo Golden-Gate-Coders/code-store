@@ -1,0 +1,16 @@
+<h1>Your Order</h1>
+
+
+<h2>Product: <%= @order.product.name %></h2>
+
+<br />
+<img src="<%= @order.product.image %>">
+<br />
+
+<h2>Quantity: <%= @order.quantity %></h2>
+
+<h2>Subtotal: <%= number_to_currency(@order.subtotal) %></h2>
+
+<h2>Tax: <%= number_to_currency(@order.tax) %></h2>
+
+<h2>Total: <%= number_to_currency(@order.total) %></h2>
