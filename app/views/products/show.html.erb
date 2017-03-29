@@ -10,12 +10,12 @@
 <br />
 <br />
 <div>
-  <%= form_tag "/orders", method: :post do %>
+  <%= form_tag "/carted_products", method: :post do %>
     Quantity: <input type="text" name="product_quantity">
     <br />
     <input type="hidden" name="product_id" value="<%= @product.id %>">
     <br />
-    <input type="submit" value="Buy Now!" class="btn btn-success">
+    <input type="submit" value="Add to Cart!" class="btn btn-success">
   <% end %>
 </div>
 <br />
