@@ -4,11 +4,9 @@ class OrdersController < ApplicationController
     quantity = params[:product_quantity]
 
     product_id = params[:product_id]
-
     product = Product.find_by(id: product_id)
     product.stock = product.stock - quantity.to_i
     product.save
-
 
     @order = Order.new(quantity: quantity, product_id: product_id, user_id: current_user.id)
 
