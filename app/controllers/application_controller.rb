@@ -14,13 +14,18 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    redirect_to "/login" unless current_user
+    if !current_user
+      flash[:danger] = "You must be logged in to do that!"
+      redirect_to "/login"
+    end
   end
 
   def authenticate_admin!
-    redirect_to "/" unless (current_user && current_user.admin)
+    if !(current_user && current_user.admin)
+      flash[:danger] = "You must be an admin to do that!"
+      redirect_to "/"
+    end
   end
-
 
   def all_categories
     Category.all
