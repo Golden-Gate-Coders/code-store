@@ -1,21 +1,43 @@
 class OrdersController < ApplicationController
 
   def create
-    quantity = params[:product_quantity]
+    # 1. Grab all the products in the current user's cart
+    @carted_products = CartedProduct.where(user_id: current_user.id, status: "carted")
 
-    product_id = params[:product_id]
-    product = Product.find_by(id: product_id)
-    product.stock = product.stock - quantity.to_i
-    product.save
+    # 2. Find the subtotal for all those carted products
+    order_subtotal = 0
+    @carted_products.each do |carted_product|
+      order_subtotal += (carted_product.product.price * carted_product.quantity)
+    end
 
-    @order = Order.new(quantity: quantity, product_id: product_id, user_id: current_user.id)
+    # 3. Calculate the order's tax
+    order_tax = order_subtotal * 0.0875
 
-    @order.calculate_subtotal(product.price, quantity.to_i)
-    @order.calculate_tax
-    @order.calculate_total
+    # 4. Calculate the order's total
+    order_total = order_subtotal + order_tax
 
-    @order.save
-    redirect_to "/orders/#{@order.id}"
+    # 5. Save a new order with all the above values
+    @order = Order.new(
+        user_id: current_user.id,
+        subtotal: order_subtotal,
+        tax: order_tax,
+        total: order_total
+      )
+
+    if @order.save
+      # 6. Update all carted products to status purchased
+      @carted_products.each do |carted_product|
+        carted_product.status = "purchased"
+        carted_product.order_id = @order.id
+        carted_product.save
+      end
+
+      flash[:success] = "Order created!"
+      redirect_to "/"
+    else
+      flash[:danger] = "Order could not be completed."
+      redirect_to "/cart"
+    end
   end
 
   def show

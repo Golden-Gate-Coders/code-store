@@ -1,0 +1,18 @@
+<h1>Your Shopping Cart</h1>
+
+<% @carted_products.each do |carted_product| %>
+  <div>
+    <h2><%= carted_product.product.name %></h2>
+    <h3>Price: <%= carted_product.product.price %></h3>
+    <%= link_to "Delete", "/carted_products/#{carted_product.id}", method: :delete %>
+  </div>
+  <br />
+  <br />
+<% end %>
+
+
+<%= form_tag "/orders", method: :post do %>
+  <input type="submit" value="Purchase Items" class="btn btn-success">
+  <br />
+  <br />
+<% end %>

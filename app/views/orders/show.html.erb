@@ -1,13 +1,12 @@
 <h1>Your Order</h1>
 
 
-<h2>Product: <%= @order.product.name %></h2>
+<h2>Products:</h2>
 
-<br />
-<img src="<%= @order.product.image %>">
-<br />
-
-<h2>Quantity: <%= @order.quantity %></h2>
+<% @order.carted_products.each do |carted_product| %>
+  <h4><%= carted_product.product.name %></h4>
+  <p>Quantity: <%= carted_product.quantity %></p>
+<% end %>
 
 <h2>Subtotal: <%= number_to_currency(@order.subtotal) %></h2>
 
