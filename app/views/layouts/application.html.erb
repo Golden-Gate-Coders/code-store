@@ -58,8 +58,9 @@
 
             <li><a href="/products?discount=true">Discount Items</a></li>
 
-            <li><a href="/products/new">New Product</a></li>
-
+            <% if current_user && current_user.admin %>
+              <li><a href="/products/new">New Product</a></li>
+            <% end %>
 
             <% if current_user %>
               <li><a href="/logout">Logout</a></li>
