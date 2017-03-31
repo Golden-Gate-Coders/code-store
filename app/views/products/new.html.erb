@@ -1,17 +1,30 @@
 <h1>New Product</h1>
 
+<% if @product.errors.any? %>
+  <div>
+    <h3><%= pluralize(@product.errors.count, "error") %></h3>
+
+    <ul>
+    <% @product.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+    </ul>
+
+  </div>
+<% end %>
+
 
 <div class="container">
 <%= form_tag "/products", method: :post do %>
-  Name: <input type="text" name="name" >
+  Name: <input type="text" name="name" value="<%= @product.name %>">
   <br />
-  Description: <input type="text" name="description">
+  Description: <input type="text" name="description" value="<%= @product.description %>">
   <br />
-  Price: <input type="text" name="price">
+  Price: <input type="text" name="price" value="<%= @product.price %>">
   <br />
-  Stock: <input type="text" name="stock">
+  Stock: <input type="text" name="stock" value="<%= @product.stock %>">
   <br />
-  Image: <input type="text" name="image">
+  Image: <input type="text" name="image" value="<%= @product.image %>">
   <br />
   Supplier: <%= collection_select(:supplier, :supplier_id, Supplier.all, :id, :name, prompt: "Select a Supplier") %>
   <br />

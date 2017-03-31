@@ -49,6 +49,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @product = Product.new
   end
 
   def create
@@ -60,10 +61,13 @@ class ProductsController < ApplicationController
       image: params[:image],
       supplier_id:params[:supplier][:supplier_id])
 
-    @product.save
-
-    flash[:success] = "Product created successfully!"
-    redirect_to "/products/#{@product.id}"
+    if @product.save
+      flash[:success] = "Product created successfully!"
+      redirect_to "/products/#{@product.id}"
+    else
+      flash[:danger] = "Product could not be created!"
+      render "new.html.erb"
+    end
   end
 
   def edit
