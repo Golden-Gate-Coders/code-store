@@ -82,10 +82,14 @@ class ProductsController < ApplicationController
     @product.price = params[:price]
     @product.stock = params[:stock]
     @product.image = params[:image]
-    @product.save
 
-    flash[:info] = "Product updated successfully!"
-    redirect_to "/products/#{@product.id}"
+    if @product.save
+      flash[:info] = "Product updated successfully!"
+      redirect_to "/products/#{@product.id}"
+    else
+      flash[:danger] = "Product could not be updated!"
+      render "edit.html.erb"
+    end
   end
 
   def destroy

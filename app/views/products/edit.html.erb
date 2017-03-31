@@ -1,5 +1,18 @@
 <h1>Edit Product</h1>
 
+<% if @product.errors.any? %>
+  <div>
+    <h3><%= pluralize(@product.errors.count, "error") %></h3>
+
+    <ul>
+    <% @product.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+    </ul>
+
+  </div>
+<% end %>
+
 <div class="container">
 <%= form_tag "/products/#{@product.id}", method: :patch do %>
   Name: <input type="text" name="name" 
